@@ -14,12 +14,12 @@
 
         table {
             width: 90%;
-            margin: 1rem auto;
+            margin: 2rem auto;
             border-collapse: collapse;
         }
 
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             padding: 8px;
             text-align: center;
         }
@@ -30,8 +30,15 @@
         }
 
         input {
-            width: 80px;
+            width: 100px;
             text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            text-align: left;
+            color: #333;
         }
 
         .feedback {
@@ -41,10 +48,14 @@
     </style>
 </head>
 <body>
-    <h1>Fill-in-the-Table Quiz</h1>
+    <header>
+        <h1>C-12 Quiz</h1>
+        <p>Fill in the blanks and press "Submit" to check your answers.</p>
+    </header>
 
-    <!-- Main Table -->
-    <table id="quiz-table">
+    <!-- Operating Conditions Table -->
+    <h2 class="section-title">Operating Conditions</h2>
+    <table>
         <thead>
             <tr>
                 <th>Operating Condition</th>
@@ -84,80 +95,92 @@
                 <td><input type="text" data-answer="105 to 135"></td>
                 <td><input type="text" data-answer="10 to 99"></td>
             </tr>
+            <tr>
+                <td>High Idle</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td><input type="text" data-answer="70"></td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td><input type="text" data-answer="-40 to 99"></td>
+            </tr>
+            <tr>
+                <td>Low Idle</td>
+                <td>N/A</td>
+                <td><input type="text" data-answer="660"></td>
+                <td><input type="text" data-answer="60"></td>
+                <td><input type="text" data-answer="1150"></td>
+                <td><input type="text" data-answer="60"></td>
+                <td><input type="text" data-answer="-40 to 99"></td>
+            </tr>
+            <tr>
+                <td>Starting</td>
+                <td>N/A</td>
+                <td><input type="text" data-answer="1000"></td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td><input type="text" data-answer="-40"></td>
+            </tr>
+            <tr>
+                <td>Transient</td>
+                <td><input type="text" data-answer="123"></td>
+                <td><input type="text" data-answer="850"></td>
+                <td><input type="text" data-answer="102.6"></td>
+                <td><input type="text" data-answer="2200"></td>
+                <td>N/A</td>
+                <td><input type="text" data-answer="100 to 104"></td>
+            </tr>
         </tbody>
     </table>
 
-    <!-- Additional Fields -->
-    <h2>Additional Fields</h2>
-    <table id="additional-fields-table">
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Field</th>
-                <th>Answer</th>
-            </tr>
-        </thead>
+    <!-- Footnotes -->
+    <h2 class="section-title">Footnotes</h2>
+    <table>
         <tbody>
             <tr>
-                <td>Airspeeds</td>
-                <td>VMO/MMO (KIAS)</td>
-                <td><input type="text" data-answer="259"></td>
-            </tr>
-            <tr>
-                <td>Airspeeds</td>
-                <td>VMCA</td>
-                <td><input type="text" data-answer="91"></td>
-            </tr>
-            <tr>
-                <td>Airspeeds</td>
-                <td>VLE</td>
-                <td><input type="text" data-answer="181"></td>
-            </tr>
-            <tr>
-                <td>Structural</td>
-                <td>Max sink rate at touchdown (<12,500 lbs) (FPM)</td>
-                <td><input type="text" data-answer="600"></td>
-            </tr>
-            <tr>
-                <td>Structural</td>
-                <td>Max sink rate at touchdown (<14,000 lbs) (FPM)</td>
-                <td><input type="text" data-answer="500"></td>
-            </tr>
-            <tr>
-                <td>Weights</td>
-                <td>Max normal ramp weight (lbs)</td>
-                <td><input type="text" data-answer="12,590"></td>
-            </tr>
-            <tr>
-                <td>Weights</td>
-                <td>Max restricted T/O weight (lbs)</td>
-                <td><input type="text" data-answer="14,000"></td>
-            </tr>
-            <tr>
-                <td>Footnotes</td>
                 <td>Torque limit below 1600 RPM (%)</td>
                 <td><input type="text" data-answer="49"></td>
             </tr>
             <tr>
-                <td>Footnotes</td>
                 <td>Minimum oil pressure above 21,000 feet (PSIG)</td>
                 <td><input type="text" data-answer="85"></td>
             </tr>
             <tr>
-                <td>Footnotes</td>
-                <td>Operation #1 time limit (minutes)</td>
+                <td>Operation time limit (minutes)</td>
                 <td><input type="text" data-answer="5"></td>
+            </tr>
+            <tr>
+                <td>Altitude temperature variation (%)</td>
+                <td><input type="text" data-answer="70"></td>
             </tr>
         </tbody>
     </table>
 
-    <!-- Submit Button -->
-    <button onclick="submitTable()">Submit All Answers</button>
-    <p id="feedback" class="feedback"></p>
+    <!-- Airspeeds/Structural/Weights -->
+    <h2 class="section-title">Airspeeds, Structural, and Weights</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td>VMO/MMO (KIAS)</td>
+                <td><input type="text" data-answer="259"></td>
+            </tr>
+            <tr>
+                <td>Max sink rate (<12,500 lbs) (FPM)</td>
+                <td><input type="text" data-answer="600"></td>
+            </tr>
+            <tr>
+                <td>Max normal ramp weight (lbs)</td>
+                <td><input type="text" data-answer="12,590"></td>
+            </tr>
+        </tbody>
+    </table>
 
+    <button onclick="submitQuiz()">Submit All Answers</button>
+    <p id="feedback" class="feedback"></p>
     <script>
-        function submitTable() {
-            const inputs = document.querySelectorAll('table input');
+        function submitQuiz() {
+            const inputs = document.querySelectorAll('input');
             let allCorrect = true;
 
             inputs.forEach(input => {
@@ -165,18 +188,10 @@
                 const correctAnswer = input.dataset.answer;
 
                 if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-                    input.style.backgroundColor = 'lightgreen'; // Correct answer
+                    input.style.backgroundColor = 'lightgreen';
                 } else {
-                    input.style.backgroundColor = 'lightcoral'; // Incorrect answer
+                    input.style.backgroundColor = 'lightcoral';
                     allCorrect = false;
-
-                    // Display correct answer next to incorrect input
-                    const feedbackText = document.createElement('span');
-                    feedbackText.textContent = ` (Correct: ${correctAnswer})`;
-                    feedbackText.style.color = 'green';
-                    if (!input.nextSibling) {
-                        input.parentElement.appendChild(feedbackText); 
-                    }
                 }
             });
 
