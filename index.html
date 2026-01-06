@@ -3,211 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice Quiz</title>
+    <title>Fill-in-the-Table Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
+            margin: 2rem;
             padding: 0;
-        }
-        header {
-            text-align: center;
-            background-color: #4CAF50;
-            color: white;
-            padding: 1rem;
-        }
-        main {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        #quiz-area, #topic-selection, #quiz-summary {
             text-align: center;
         }
-        button {
-            padding: 0.5rem 1rem;
-            margin: 0.5rem;
-            border: none;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
+
+        table {
+            width: 90%;
+            margin: 1rem auto;
+            border-collapse: collapse;
         }
-        button:hover {
-            background-color: #45a049;
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
         }
-        #answer-feedback {
-            font-size: 1.2rem;
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        input {
+            width: 80px;
+            text-align: center;
+        }
+
+        .feedback {
+            font-weight: bold;
             margin-top: 1rem;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Practice Quiz</h1>
-        <p>Select a topic and start the quiz!</p>
-    </header>
-    <main>
-        <section id="topic-selection">
-            <h2>Choose a Topic:</h2>
-            <button onclick="startQuiz('C-12')">C-12</button>
-        </section>
-        <section id="quiz-area" style="display: none;">
-            <h2 id="quiz-topic"></h2>
-            <p id="question-text">Question will appear here</p>
-            <input type="text" id="answer" placeholder="Your answer">
-            <p id="answer-feedback" style="font-weight: bold; color: red;"></p>
-            <button onclick="submitAnswer()">Submit</button>
-            <button id="next-question-button" onclick="nextQuestion()" style="display: none;">Next Question</button>
-        </section>
-        <section id="quiz-summary" style="display: none;">
-            <h2>Quiz Summary</h2>
-            <p id="summary-text">Your results will appear here.</p>
-            <button onclick="restartQuiz()">Restart</button>
-        </section>
-    </main>
+    <h1>Fill-in-the-Table Quiz</h1>
+    <table id="quiz-table">
+        <thead>
+            <tr>
+                <th>Operating Condition</th>
+                <th>Torque Percent</th>
+                <th>Maximum Observed TGT (°C)</th>
+                <th>Gas Generator RPM N1 (%)</th>
+                <th>Prop RPM N2</th>
+                <th>Oil Press PSI</th>
+                <th>Oil Temp (°C)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Takeoff</td>
+                <td><input type="text" data-answer="100"></td>
+                <td><input type="text" data-answer="750"></td>
+                <td><input type="text" data-answer="101.5"></td>
+                <td><input type="text" data-answer="2000"></td>
+                <td><input type="text" data-answer="105 to 135"></td>
+                <td><input type="text" data-answer="10 to 99"></td>
+            </tr>
+            <tr>
+                <td>Emergency Continuous</td>
+                <td><input type="text" data-answer="100"></td>
+                <td><input type="text" data-answer="750"></td>
+                <td><input type="text" data-answer="101.5"></td>
+                <td><input type="text" data-answer="2000"></td>
+                <td><input type="text" data-answer="105 to 135"></td>
+                <td><input type="text" data-answer="10 to 99"></td>
+            </tr>
+            <tr>
+                <td>Maximum Continuous</td>
+                <td><input type="text" data-answer="100"></td>
+                <td><input type="text" data-answer="725"></td>
+                <td><input type="text" data-answer="101.5"></td>
+                <td><input type="text" data-answer="2000"></td>
+                <td><input type="text" data-answer="105 to 135"></td>
+                <td><input type="text" data-answer="10 to 99"></td>
+            </tr>
+            <!-- Add additional rows for other operating conditions -->
+        </tbody>
+    </table>
+    <button onclick="submitTable()">Submit</button>
+    <p id="feedback" class="feedback"></p>
     <script>
-    const quizzes = {
-            "C-12": [
-                      // Adding new questions for C-12
-      { question: "Torque limit applies within the range of 1600-2000 prop RPM. Below 1600 RPM, torque is limited to ____%.", answer: "49" },
-      { question: "The minimum oil pressure above 21,000 feet is ____ PSIG.", answer: "85" },
-      { question: "Oil pressure should not be below ____ PSIG.", answer: "60" },
-      { question: "These torque values are limited to ____ minutes.", answer: "5" },
-      { question: "At approximately ____% N1, limits are met.", answer: "70" },
-      { question: "High TGT at ground idle can be corrected by reducing ____ or increasing N1.", answer: "load" },
-      { question: "Operation between ____ and ____ propeller RPM is permissible only with prop feathered.", answer: "0, 450" },
+        function submitTable() {
+            const inputs = document.querySelectorAll('#quiz-table input');
+            let allCorrect = true;
 
-      // Airspeeds
-      { question: "Maximum operating airspeed (VMO/MMO) is ____ KIAS or ____ Mach.", answer: "259, 0.52" },
-      { question: "Maneuvering airspeed (VMCA) is ____ KIAS at 12,500# and 0 flaps.", answer: "91" },
-      { question: "Best angle speed (VX) is ____ KIAS for clean configurations.", answer: "100" },
-      { question: "Turbulent air penetration speed (VRA) is ____ KIAS.", answer: "170" },
+            inputs.forEach(input => {
+                const userAnswer = input.value.trim();
+                const correctAnswer = input.dataset.answer;
 
-      // Structural limits
-      { question: "Max sink rate at touchdown (<12,500 lbs) is ____ FPM.", answer: "600" },
-      { question: "Max sink rate at touchdown (<14,000 lbs) is ____ FPM.", answer: "500" },
+                if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                    input.style.backgroundColor = 'lightgreen'; // Correct answer
+                } else {
+                    input.style.backgroundColor = 'lightcoral'; // Incorrect answer
+                    allCorrect = false;
 
-      { question: "Max normal ramp weight is ____ lbs.", answer: "12590" },
-      { question: "Max normal T/O weight is ____ lbs.", answer: "12500" },
-      { question: "Max zero fuel weight is ____ lbs.", answer: "10400" },
-      { question: "Max restricted T/O weight is ____ lbs.", answer: "14000" },
-      { question: "Max restricted zero fuel weight is ____ lbs.", answer: "11000" },
-      
-        { question: "For Operating Condition: Takeoff, what is the Maximum Torque %?", answer: "100" },
-        { question: "For Operating Condition: Takeoff, what is the Maximum Observed TGT (°C)?", answer: "750" },
-        { question: "For Operating Condition: Takeoff, what is the Maximum Gas Generator RPM N1 %?", answer: "101.5" },
-        { question: "For Operating Condition: Takeoff, what is the Maximum Prop RPM N2?", answer: "2000" },
-        { question: "For Operating Condition: Takeoff, what is the Maximum Oil Pressure (PSI)?", answer: "105–135" },
-        { question: "For Operating Condition: Takeoff, what is the Maximum Oil Temp (°C)?", answer: "10–99" },
+                    const feedbackText = document.createElement('span');
+                    feedbackText.textContent = ` (Correct: ${correctAnswer})`;
+                    feedbackText.style.color = 'green';
+                    if (!input.nextSibling) {
+                        input.parentElement.appendChild(feedbackText); // Display correct answer
+                    }
+                }
+            });
 
-        { question: "For Operating Condition: Emergency Continuous, what is the Maximum Torque %?", answer: "100" },
-        { question: "For Operating Condition: Emergency Continuous, what is the Maximum Observed TGT (°C)?", answer: "750" },
-        { question: "For Operating Condition: Emergency Continuous, what is the Maximum Gas Generator RPM N1 %?", answer: "101.5" },
-        { question: "For Operating Condition: Emergency Continuous, what is the Maximum Prop RPM N2?", answer: "2000" },
-        { question: "For Operating Condition: Emergency Continuous, what is the Maximum Oil Pressure (PSI)?", answer: "105–135" },
-        { question: "For Operating Condition: Emergency Continuous, what is the Maximum Oil Temp (°C)?", answer: "10–99" },
-
-        { question: "For Operating Condition: Maximum Continuous, what is the Maximum Torque %?", answer: "100" },
-        { question: "For Operating Condition: Maximum Continuous, what is the Maximum Observed TGT (°C)?", answer: "725" },
-        { question: "For Operating Condition: Maximum Continuous, what is the Maximum Gas Generator RPM N1 %?", answer: "101.5" },
-        { question: "For Operating Condition: Maximum Continuous, what is the Maximum Prop RPM N2?", answer: "2000" },
-        { question: "For Operating Condition: Maximum Continuous, what is the Maximum Oil Pressure (PSI)?", answer: "105–135" },
-        { question: "For Operating Condition: Maximum Continuous, what is the Maximum Oil Temp (°C)?", answer: "10–99" },
-
-        { question: "For Operating Condition: High Idle, what is the Maximum Gas Generator RPM N1 %?", answer: "5" },
-        { question: "For Operating Condition: High Idle, what is the Maximum Oil Temp (°C)?", answer: "−40–99" },
-
-        { question: "For Operating Condition: Low Idle, what is the Maximum Observed TGT (°C)?", answer: "660" },
-        { question: "For Operating Condition: Low Idle, what is the Minimum Gas Generator RPM N1 %?", answer: "60" },
-        { question: "For Operating Condition: Low Idle, what is the Minimum Prop RPM N2?", answer: "1150" },
-        { question: "For Operating Condition: Low Idle, what is the Minimum Oil Pressure (PSI)?", answer: "60" },
-        { question: "For Operating Condition: Low Idle, what is the Maximum Oil Temp (°C)?", answer: "−40–99" },
-
-        { question: "For Operating Condition: Starting, what is the Maximum Observed TGT (°C)?", answer: "1000" },
-        { question: "For Operating Condition: Starting, what is the Minimum Oil Temp (°C)?", answer: "−40" },
-
-        { question: "For Operating Condition: Transient, what is the Maximum Torque %?", answer: "123" },
-        { question: "For Operating Condition: Transient, what is the Maximum Observed TGT (°C)?", answer: "850" },
-        { question: "For Operating Condition: Transient, what is the Maximum Gas Generator RPM N1 %?", answer: "102.6" },
-        { question: "For Operating Condition: Transient, what is the Maximum Prop RPM N2?", answer: "2200" },
-        { question: "For Operating Condition: Transient, what is the Maximum Oil Temp (°C)?", answer: "100–104" },
-
-        { question: "For Operating Condition: Max Reverse, what is the Maximum Observed TGT (°C)?", answer: "750" },
-        { question: "For Operating Condition: Max Reverse, what is the Maximum Gas Generator RPM N1 %?", answer: "88" },
-        { question: "For Operating Condition: Max Reverse, what is the Maximum Prop RPM N2?", answer: "1900" },
-        { question: "For Operating Condition: Max Reverse, what is the Maximum Oil Temp (°C)?", answer: "0–99" }
-            ],
-            "T-38": [
-                { question: "What is the top speed of T-38?", answer: "Mach 1.3" },
-                { question: "What is the climb rate of T-38?", answer: "33,600 ft/min" }
-            ],
-            "F-16": [
-                { question: "What is the maximum speed of F-16?", answer: "Mach 2" },
-                { question: "What is the g-force limit of F-16?", answer: "+9 Gs" }
-            ]
-        };
-    let currentQuiz = [];
-        let currentQuestionIndex = 0;
-        let score = 0;
-
-        function startQuiz(topic) {
-            document.getElementById('topic-selection').style.display = 'none';
-            document.getElementById('quiz-area').style.display = 'block';
-            document.getElementById('quiz-topic').innerText = `Topic: ${topic}`;
-            currentQuiz = quizzes[topic];
-            currentQuestionIndex = 0;
-            score = 0;
-            loadQuestion();
-        }
-
-        function loadQuestion() {
-            if (currentQuestionIndex < currentQuiz.length) {
-                document.getElementById('question-text').innerText = currentQuiz[currentQuestionIndex].question;
-                document.getElementById('answer-feedback').innerText = '';
-                document.getElementById('answer').value = '';
-                document.getElementById('next-question-button').style.display = 'none';
-            } else {
-                endQuiz();
-            }
-        }
-
-        function submitAnswer() {
-            const userAnswer = document.getElementById('answer').value.trim();
-            const correctAnswer = currentQuiz[currentQuestionIndex].answer;
-
-            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-                document.getElementById('answer-feedback').innerText = 'Correct!';
-                document.getElementById('answer-feedback').style.color = 'green';
-                score++;
-            } else {
-                document.getElementById('answer-feedback').innerText = `Incorrect! The correct answer is: ${correctAnswer}`;
-                document.getElementById('answer-feedback').style.color = 'red';
-            }
-            document.getElementById('next-question-button').style.display = 'block';
-        }
-
-        function nextQuestion() {
-            document.getElementById('next-question-button').style.display = 'none';
-            document.getElementById('answer-feedback').innerText = '';
-            currentQuestionIndex++;
-            loadQuestion();
-        }
-
-        function endQuiz() {
-            document.getElementById('quiz-area').style.display = 'none';
-            document.getElementById('quiz-summary').style.display = 'block';
-            document.getElementById('summary-text').innerText = `You scored ${score} out of ${currentQuiz.length}`;
-        }
-
-        function restartQuiz() {
-            document.getElementById('quiz-summary').style.display = 'none';
-            document.getElementById('topic-selection').style.display = 'block';
+            const feedbackMessage = allCorrect ? 'All answers are correct!' : 'Some answers are incorrect. Review highlighted fields.';
+            document.getElementById('feedback').innerText = feedbackMessage;
         }
     </script>
 </body>
