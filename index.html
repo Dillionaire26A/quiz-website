@@ -242,6 +242,7 @@
 </table>
 
 
+```javascript
 function submitQuiz() {
     const inputs = document.querySelectorAll('input');
     let allCorrect = true;
@@ -257,6 +258,12 @@ function submitQuiz() {
             allCorrect = false;
         }
     });
+
+    const feedbackMessage = allCorrect ? 'All answers are correct!' : 'Some answers are incorrect. Review highlighted fields.';
+    document.getElementById('feedback').innerText = feedbackMessage;
+}
+```
+
 
     const feedbackMessage = allCorrect ? 'All answers are correct!' : 'Some answers are incorrect. Review highlighted fields.';
     document.getElementById('feedback').innerText = feedbackMessage;
