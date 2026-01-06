@@ -1,45 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice Quiz</title>
-    <style>
-        /* Add your styles here */
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice Quiz</title>
 </head>
-
 <body>
-    <header>
-        <h1>Practice Quiz</h1>
-        <p>Select a topic and start the quiz!</p>
-    </header>
-    <main>
-        <section id="topic-selection">
-            <h2>Choose a Topic:</h2>
-            <button onclick="startQuiz('C-12')">C-12</button>
-            <button onclick="startQuiz('T-38')">T-38</button>
-            <button onclick="startQuiz('F-16')">F-16</button>
-        </section>
-        <section id="quiz-area" style="display: none;">
-            <h2 id="quiz-topic"></h2>
-            <p id="question-text">Question will appear here</p>
-            <input type="text" id="answer" placeholder="Your answer">
-            <button onclick="submitAnswer()">Submit</button>
-        </section>
-        <section id="quiz-summary" style="display: none;">
-            <h2>Quiz Summary</h2>
-            <p id="summary-text">Your results will appear here.</p>
-            <button onclick="restartQuiz()">Restart</button>
-        </section>
-    </main>
-    <script>
-        const quizzes = {
+  <header>
+    <h1>Practice Quiz</h1>
+    <p>Select a topic and start the quiz!</p>
+  </header>
+  <main>
+    <section id="topic-selection">
+      <h2>Choose a Topic:</h2>
+      <button onclick="startQuiz('C-12')">C-12</button>
+    </section>
+    <section id="quiz-area" style="display: none;">
+      <h2 id="quiz-topic"></h2>
+      <p id="question-text">Question will appear here</p>
+      <input type="text" id="answer" placeholder="Your answer">
+      <p id="answer-feedback" style="font-weight: bold; color: red;"></p>
+      <button onclick="submitAnswer()">Submit</button>
+    </section>
+    <section id="quiz-summary" style="display: none;">
+      <h2>Quiz Summary</h2>
+      <p id="summary-text">Your results will appear here.</p>
+      <button onclick="restartQuiz()">Restart</button>
+    </section>
+  </main>
+  <script>
+    const quizzes = {
             "C-12": [
                       // Adding new questions for C-12
-      { question: "Torque limit applies within the range of ____-2000 prop RPM (N2).", answer: "1600" },
-      { question: "Below 1600 RPM, torque is limited to ____%.", answer: "49" },
+      { question: "Torque limit applies within the range of 1600-2000 prop RPM.cBelow 1600 RPM, torque is limited to ____%.", answer: "49" },
       { question: "The minimum oil pressure above 21,000 feet is ____ PSIG.", answer: "85" },
       { question: "Oil pressure should not be below ____ PSIG.", answer: "60" },
       { question: "These torque values are limited to ____ minutes.", answer: "5" },
@@ -118,53 +111,57 @@
         };
 
         let currentQuiz = [];
-        let currentQuestionIndex = 0;
-        let score = 0;
+    let currentQuestionIndex = 0;
+    let score = 0;
 
-        function startQuiz(topic) {
-            document.getElementById('topic-selection').style.display = 'none';
-            document.getElementById('quiz-area').style.display = 'block';
-            document.getElementById('quiz-topic').innerText = `Topic: ${topic}`;
+    function startQuiz(topic) {
+      document.getElementById('topic-selection').style.display = 'none';
+      document.getElementById('quiz-area').style.display = 'block';
+      document.getElementById('quiz-topic').innerText = `Topic: ${topic}`;
+      currentQuiz = quizzes[topic];
+      currentQuestionIndex = 0;
+      score = 0;
+      loadQuestion();
+    }
 
-            currentQuiz = quizzes[topic];
-            currentQuestionIndex = 0;
-            score = 0;
-            loadQuestion();
-        }
+    function loadQuestion() {
+      if (currentQuestionIndex < currentQuiz.length) {
+        document.getElementById('question-text').innerText = currentQuiz[currentQuestionIndex].question;
+        document.getElementById('answer-feedback').innerText = '';
+        document.getElementById('answer').value = '';
+      } else {
+        endQuiz();
+      }
+    }
 
-        function loadQuestion() {
-            if (currentQuestionIndex < currentQuiz.length) {
-                document.getElementById('question-text').innerText = currentQuiz[currentQuestionIndex].question;
-                document.getElementById('answer').value = '';
-            } else {
-                endQuiz();
-            }
-        }
+    function submitAnswer() {
+      const userAnswer = document.getElementById('answer').value.trim();
+      const correctAnswer = currentQuiz[currentQuestionIndex].answer;
 
-        function submitAnswer() {
-            const userAnswer = document.getElementById('answer').value.trim();
-            const correctAnswer = currentQuiz[currentQuestionIndex].answer;
+      if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        document.getElementById('answer-feedback').innerText = 'Correct!';
+        score++;
+      } else {
+        document.getElementById('answer-feedback').innerText = `Incorrect! The correct answer is: ${correctAnswer}`;
+      }
 
-            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-                score++;
-            }
+      setTimeout(() => {
+        currentQuestionIndex++;
+        loadQuestion();
+      }, 2000);
+    }
 
-            currentQuestionIndex++;
-            loadQuestion();
-        }
+    function endQuiz() {
+      document.getElementById('quiz-area').style.display = 'none';
+      document.getElementById('quiz-summary').style.display = 'block';
 
-        function endQuiz() {
-            document.getElementById('quiz-area').style.display = 'none';
-            document.getElementById('quiz-summary').style.display = 'block';
+      document.getElementById('summary-text').innerText = `You scored ${score} out of ${currentQuiz.length}`;
+    }
 
-            document.getElementById('summary-text').innerText = `You scored ${score} out of ${currentQuiz.length}`;
-        }
-
-        function restartQuiz() {
-            document.getElementById('quiz-summary').style.display = 'none';
-            document.getElementById('topic-selection').style.display = 'block';
-        }
-    </script>
+    function restartQuiz() {
+      document.getElementById('quiz-summary').style.display = 'none';
+      document.getElementById('topic-selection').style.display = 'block';
+    }
+  </script>
 </body>
-
 </html>
