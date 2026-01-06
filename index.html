@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fill-in-the-Table Quiz</title>
+    <title>C-12 Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -131,73 +131,189 @@
                 <td>N/A</td>
                 <td><input type="text" data-answer="100 to 104"></td>
             </tr>
+            <tr>
+                <td>Max Reverse</td>
+                <td>N/A</td>
+                <td><input type="text" data-answer="750"></td>
+                <td><input type="text" data-answer="88"></td>
+                <td><input type="text" data-answer="1900"></td>
+                <td><input type="text" data-answer="105 to 135"></td>
+                <td><input type="text" data-answer="0 to 99"></td>
+            </tr>
         </tbody>
     </table>
 
-    <!-- Footnotes -->
+    <!-- Footnotes Section -->
     <h2 class="section-title">Footnotes</h2>
     <table>
         <tbody>
-            <tr>
-                <td>Torque limit below 1600 RPM (%)</td>
-                <td><input type="text" data-answer="49"></td>
-            </tr>
-            <tr>
-                <td>Minimum oil pressure above 21,000 feet (PSIG)</td>
-                <td><input type="text" data-answer="85"></td>
-            </tr>
-            <tr>
-                <td>Operation time limit (minutes)</td>
-                <td><input type="text" data-answer="5"></td>
-            </tr>
-            <tr>
-                <td>Altitude temperature variation (%)</td>
-                <td><input type="text" data-answer="70"></td>
-            </tr>
-        </tbody>
-    </table>
+            <tr><td>Torque limit applies within range of 1600-2000 prop RPM (N2). Below 1600 RPM, torque is limited to __%</td><td><input type="text" data-answer="49"></td></tr>
+            <tr><td>The minimum oil pressure above 21,000 feet is __ PSIG.</td><td><input type="text" data-answer="85"></td></tr>
+            <tr><td>These values are time-limited to: __ minutes.</td><td><input type="text" data-answer="5"></td></tr>
+            <tr><td>At approximately __% N1, limits are reached.</td><td><input type="text" data-answer="70"></td></tr>
+            <tr><td>These values are temperature-specific for operating conditions (°C).</td><td><input>(`More extent w/custom footnote-based Validation`)
+Apologies for the truncation! Let me fully complete the **footnotes**, **airspeeds**, **structural**, and **weights sections**. Here's the finalized implementation:
 
-    <!-- Airspeeds/Structural/Weights -->
-    <h2 class="section-title">Airspeeds, Structural, and Weights</h2>
-    <table>
-        <tbody>
-            <tr>
-                <td>VMO/MMO (KIAS)</td>
-                <td><input type="text" data-answer="259"></td>
-            </tr>
-            <tr>
-                <td>Max sink rate (<12,500 lbs) (FPM)</td>
-                <td><input type="text" data-answer="600"></td>
-            </tr>
-            <tr>
-                <td>Max normal ramp weight (lbs)</td>
-                <td><input type="text" data-answer="12,590"></td>
-            </tr>
-        </tbody>
-    </table>
+---
 
-    <button onclick="submitQuiz()">Submit All Answers</button>
-    <p id="feedback" class="feedback"></p>
-    <script>
-        function submitQuiz() {
-            const inputs = document.querySelectorAll('input');
-            let allCorrect = true;
+### Final HTML Update
 
-            inputs.forEach(input => {
-                const userAnswer = input.value.trim();
-                const correctAnswer = input.dataset.answer;
+#### **Footnotes Section** (13 Rows with Questions from Image):
+```html
+<!-- Footnotes Section -->
+<h2 class="section-title">Footnotes</h2>
+<table>
+    <tbody>
+        <tr>
+            <td>Torque limit applies within range of 1600-2000 prop RPM (N2). Below 1600 RPM, torque is limited to __%</td>
+            <td><input type="text" data-answer="49"></td>
+        </tr>
+        <tr>
+            <td>The minimum oil pressure above 21,000 feet is __ PSIG.</td>
+            <td><input type="text" data-answer="85"></td>
+        </tr>
+        <tr>
+            <td>Oil pressure values are acceptable between __ and __ PSIG.</td>
+            <td><input type="text" data-answer="60 to 85"></td>
+        </tr>
+        <tr>
+            <td>Operation maximum torque limit is time-restricted to __ minutes.</td>
+            <td><input type="text" data-answer="5"></td>
+        </tr>
+        <tr>
+            <td>Cruise torque varies with altitude and temperature (approx. __% N1).</td>
+            <td><input type="text" data-answer="70"></td>
+        </tr>
+        <tr>
+            <td>High TGT at ground idle can be corrected by reducing __ or increasing N1.</td>
+            <td><input type="text" data-answer="load"></td>
+        </tr>
+        <tr>
+            <td>These values are time-limited to __ seconds.</td>
+            <td><input type="text" data-answer="5"></td>
+        </tr>
+        <tr>
+            <td>This operation is time-limited to __ seconds.</td>
+            <td><input type="text" data-answer="10"></td>
+        </tr>
+        <tr>
+            <td>This operation is further time-limited to __ minute.</td>
+            <td><input type="text" data-answer="1"></td>
+        </tr>
+        <tr>
+            <td>For every 5.6°C below -48°C ambient temp., reduce allowable N1 by __%.</td>
+            <td><input type="text" data-answer="1.6"></td>
+        </tr>
+        <tr>
+            <td>For observed TGT above __°C, refer to Overtemperature Limits chart.</td>
+            <td><input type="text" data-answer="750"></td>
+        </tr>
+        <tr>
+            <td>On ground, increases in oil temp can be countered by placing CONDITION lever in __.</td>
+            <td><input type="text" data-answer="LOW IDLE"></td>
+        </tr>
+        <tr>
+            <td>Operation between __ and __ prop RPM is permissible only with prop feathered.</td>
+            <td><input type="text" data-answer="0 to 450"></td>
+        </tr>
+    </tbody>
+</table>
+```
 
-                if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-                    input.style.backgroundColor = 'lightgreen';
-                } else {
-                    input.style.backgroundColor = 'lightcoral';
-                    allCorrect = false;
-                }
-            });
+---
 
-            const feedbackMessage = allCorrect ? 'All answers are correct!' : 'Some answers are incorrect. Review highlighted fields.';
-            document.getElementById('feedback').innerText = feedbackMessage;
+#### **Airspeeds Section** (10 Questions):
+```html
+<!-- Airspeeds Section -->
+<h2 class="section-title">Airspeeds</h2>
+<table>
+    <tbody>
+        <tr><td>VMO/MMO (KIAS):</td><td><input type="text" data-answer="259"></td></tr>
+        <tr><td>VMCA (KIAS):</td><td><input type="text" data-answer="91"></td></tr>
+        <tr><td>VYSE (clean/12,500#):</td><td><input type="text" data-answer="121"></td></tr>
+        <tr><td>VSSE (12,500#):</td><td><input type="text" data-answer="117"></td></tr>
+        <tr><td>VX (clean/12,500#):</td><td><input type="text" data-answer="100"></td></tr>
+        <tr><td>VRA (turbulent air penetration):</td><td><input type="text" data-answer="170"></td></tr>
+        <tr><td>VLE (gear extension/extended):</td><td><input type="text" data-answer="181"></td></tr>
+        <tr><td>VLO (gear retract):</td><td><input type="text" data-answer="163"></td></tr>
+        <tr><td>VFE40 (flap extend):</td><td><input type="text" data-answer="200"></td></tr>
+        <tr>
+            <td>VFE100 (flap extend):</td>
+            <td>
+                <input type="text" data-answer="146"> and <input type="text" data-answer="157">
+            </td>
+        </tr>
+    </tbody>
+</table>
+```
+
+---
+
+#### **Structural Section** (2 Questions):
+```html
+<!-- Structural Section -->
+<h2 class="section-title">Structural</h2>
+<table>
+    <tbody>
+        <tr><td>Max sink rate at touchdown (<12,500 lbs) (FPM):</td><td><input type="text" data-answer="600"></td></tr>
+        <tr><td>Max sink rate at touchdown (<14,000 lbs) (FPM):</td><td><input type="text" data-answer="500"></td></tr>
+    </tbody>
+</table>
+```
+
+---
+
+#### **Weights Section** (5 Questions):
+```html
+<!-- Weights Section -->
+<h2 class="section-title">Weights</h2>
+<table>
+    <tbody>
+        <tr><td>Max normal ramp weight (lbs):</td><td><input type="text" data-answer="12,590"></td></tr>
+        <tr><td>Max normal T/O weight (lbs):</td><td><input type="text" data-answer="12,500"></td></tr>
+        <tr><td>Max zero fuel weight (lbs):</td><td><input type="text" data-answer="10,400"></td></tr>
+        <tr><td>Max restricted T/O weight (lbs):</td><td><input type="text" data-answer="14,000"></td></tr>
+        <tr><td>Max restricted zero fuel weight (lbs):</td><td><input type="text" data-answer="11,000"></td></tr>
+    </tbody>
+</table>
+```
+
+---
+
+### Final JavaScript for Submission:
+The submission logic evaluates all fields and displays feedback (green for correct or red for incorrect), similar to the previously shared code:
+
+```javascript
+function submitQuiz() {
+    const inputs = document.querySelectorAll('input');
+    let allCorrect = true;
+
+    inputs.forEach(input => {
+        const userAnswer = input.value.trim();
+        const correctAnswer = input.dataset.answer;
+
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            input.style.backgroundColor = 'lightgreen';
+        } else {
+            input.style.backgroundColor = 'lightcoral';
+            allCorrect = false;
         }
-    </script>
-</body>
-</html>
+    });
+
+    const feedbackMessage = allCorrect ? 'All answers are correct!' : 'Some answers are incorrect. Review highlighted fields.';
+    document.getElementById('feedback').innerText = feedbackMessage;
+}
+```
+
+---
+
+### Updated Features:
+- **13 Footnotes Questions**: All lines with orange text converted to input questions.
+- **Structured Sections**:
+  - Operating Conditions (unchanged from the earlier table).
+  - Footnotes (13 rows).
+  - Airspeeds (10 rows, 2 fields for `VFE100`).
+  - Structural (2 rows).
+  - Weights (5 rows).
+
+Let me know how this works for you or if further adjustments are needed!
