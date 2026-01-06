@@ -42,6 +42,8 @@
 </head>
 <body>
     <h1>Fill-in-the-Table Quiz</h1>
+
+    <!-- Main Table -->
     <table id="quiz-table">
         <thead>
             <tr>
@@ -82,14 +84,80 @@
                 <td><input type="text" data-answer="105 to 135"></td>
                 <td><input type="text" data-answer="10 to 99"></td>
             </tr>
-            <!-- Add additional rows for other operating conditions -->
         </tbody>
     </table>
-    <button onclick="submitTable()">Submit</button>
+
+    <!-- Additional Fields -->
+    <h2>Additional Fields</h2>
+    <table id="additional-fields-table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Field</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Airspeeds</td>
+                <td>VMO/MMO (KIAS)</td>
+                <td><input type="text" data-answer="259"></td>
+            </tr>
+            <tr>
+                <td>Airspeeds</td>
+                <td>VMCA</td>
+                <td><input type="text" data-answer="91"></td>
+            </tr>
+            <tr>
+                <td>Airspeeds</td>
+                <td>VLE</td>
+                <td><input type="text" data-answer="181"></td>
+            </tr>
+            <tr>
+                <td>Structural</td>
+                <td>Max sink rate at touchdown (<12,500 lbs) (FPM)</td>
+                <td><input type="text" data-answer="600"></td>
+            </tr>
+            <tr>
+                <td>Structural</td>
+                <td>Max sink rate at touchdown (<14,000 lbs) (FPM)</td>
+                <td><input type="text" data-answer="500"></td>
+            </tr>
+            <tr>
+                <td>Weights</td>
+                <td>Max normal ramp weight (lbs)</td>
+                <td><input type="text" data-answer="12,590"></td>
+            </tr>
+            <tr>
+                <td>Weights</td>
+                <td>Max restricted T/O weight (lbs)</td>
+                <td><input type="text" data-answer="14,000"></td>
+            </tr>
+            <tr>
+                <td>Footnotes</td>
+                <td>Torque limit below 1600 RPM (%)</td>
+                <td><input type="text" data-answer="49"></td>
+            </tr>
+            <tr>
+                <td>Footnotes</td>
+                <td>Minimum oil pressure above 21,000 feet (PSIG)</td>
+                <td><input type="text" data-answer="85"></td>
+            </tr>
+            <tr>
+                <td>Footnotes</td>
+                <td>Operation #1 time limit (minutes)</td>
+                <td><input type="text" data-answer="5"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Submit Button -->
+    <button onclick="submitTable()">Submit All Answers</button>
     <p id="feedback" class="feedback"></p>
+
     <script>
         function submitTable() {
-            const inputs = document.querySelectorAll('#quiz-table input');
+            const inputs = document.querySelectorAll('table input');
             let allCorrect = true;
 
             inputs.forEach(input => {
@@ -102,11 +170,12 @@
                     input.style.backgroundColor = 'lightcoral'; // Incorrect answer
                     allCorrect = false;
 
+                    // Display correct answer next to incorrect input
                     const feedbackText = document.createElement('span');
                     feedbackText.textContent = ` (Correct: ${correctAnswer})`;
                     feedbackText.style.color = 'green';
                     if (!input.nextSibling) {
-                        input.parentElement.appendChild(feedbackText); // Display correct answer
+                        input.parentElement.appendChild(feedbackText); 
                     }
                 }
             });
