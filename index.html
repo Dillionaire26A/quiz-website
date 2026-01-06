@@ -241,24 +241,31 @@
     </tbody>
 </table>
 
+<!-- Submit Section -->
+<button onclick="submitQuiz()">Submit All Answers</button>
+<p id="feedback" class="feedback"></p>
 
-```javascript
-function submitQuiz() {
-    const inputs = document.querySelectorAll('input');
-    let allCorrect = true;
+<!-- JavaScript -->
+<script>
+    function submitQuiz() {
+        const inputs = document.querySelectorAll('input');
+        let allCorrect = true;
 
-    inputs.forEach(input => {
-        const userAnswer = input.value.trim();
-        const correctAnswer = input.dataset.answer;
+        inputs.forEach(input => {
+            const userAnswer = input.value.trim();
+            const correctAnswer = input.dataset.answer;
 
-        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-            input.style.backgroundColor = 'lightgreen';
-        } else {
-            input.style.backgroundColor = 'lightcoral';
-            allCorrect = false;
-        }
-    });
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                input.style.backgroundColor = 'lightgreen';
+            } else {
+                input.style.backgroundColor = 'lightcoral';
+                allCorrect = false;
+            }
+        });
 
-    const feedbackMessage = allCorrect ? 'All answers are correct!' : 'Some answers are incorrect. Review highlighted fields.';
-    document.getElementById('feedback').innerText = feedbackMessage;
-}
+        const feedbackMessage = allCorrect ? 'All answers are correct!' : 'Some answers are incorrect. Review highlighted fields.';
+        document.getElementById('feedback').innerText = feedbackMessage;
+    }
+</script>
+</body>
+</html>
