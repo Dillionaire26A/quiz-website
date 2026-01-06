@@ -1,34 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Practice Quiz</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #quiz-area, #topic-selection, #quiz-summary {
+            text-align: center;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #answer-feedback {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Practice Quiz</h1>
-    <p>Select a topic and start the quiz!</p>
-  </header>
-  <main>
-    <section id="topic-selection">
-      <h2>Choose a Topic:</h2>
-      <button onclick="startQuiz('C-12')">C-12</button>
-    </section>
-    <section id="quiz-area" style="display: none;">
-      <h2 id="quiz-topic"></h2>
-      <p id="question-text">Question will appear here</p>
-      <input type="text" id="answer" placeholder="Your answer">
-      <p id="answer-feedback" style="font-weight: bold; color: red;"></p>
-      <button onclick="submitAnswer()">Submit</button>
-    </section>
-    <section id="quiz-summary" style="display: none;">
-      <h2>Quiz Summary</h2>
-      <p id="summary-text">Your results will appear here.</p>
-      <button onclick="restartQuiz()">Restart</button>
-    </section>
-  </main>
-  <script>
+    <header>
+        <h1>Practice Quiz</h1>
+        <p>Select a topic and start the quiz!</p>
+    </header>
+    <main>
+        <section id="topic-selection">
+            <h2>Choose a Topic:</h2>
+            <button onclick="startQuiz('C-12')">C-12</button>
+        </section>
+        <section id="quiz-area" style="display: none;">
+            <h2 id="quiz-topic"></h2>
+            <p id="question-text">Question will appear here</p>
+            <input type="text" id="answer" placeholder="Your answer">
+            <p id="answer-feedback" style="font-weight: bold; color: red;"></p>
+            <button onclick="submitAnswer()">Submit</button>
+            <button id="next-question-button" onclick="nextQuestion()" style="display: none;">Next Question</button>
+        </section>
+        <section id="quiz-summary" style="display: none;">
+            <h2>Quiz Summary</h2>
+            <p id="summary-text">Your results will appear here.</p>
+            <button onclick="restartQuiz()">Restart</button>
+        </section>
+    </main>
+    <script>
     const quizzes = {
             "C-12": [
                       // Adding new questions for C-12
@@ -109,59 +152,63 @@
                 { question: "What is the g-force limit of F-16?", answer: "+9 Gs" }
             ]
         };
+    let currentQuiz = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
 
-        let currentQuiz = [];
-    let currentQuestionIndex = 0;
-    let score = 0;
+        function startQuiz(topic) {
+            document.getElementById('topic-selection').style.display = 'none';
+            document.getElementById('quiz-area').style.display = 'block';
+            document.getElementById('quiz-topic').innerText = `Topic: ${topic}`;
+            currentQuiz = quizzes[topic];
+            currentQuestionIndex = 0;
+            score = 0;
+            loadQuestion();
+        }
 
-    function startQuiz(topic) {
-      document.getElementById('topic-selection').style.display = 'none';
-      document.getElementById('quiz-area').style.display = 'block';
-      document.getElementById('quiz-topic').innerText = `Topic: ${topic}`;
-      currentQuiz = quizzes[topic];
-      currentQuestionIndex = 0;
-      score = 0;
-      loadQuestion();
-    }
+        function loadQuestion() {
+            if (currentQuestionIndex < currentQuiz.length) {
+                document.getElementById('question-text').innerText = currentQuiz[currentQuestionIndex].question;
+                document.getElementById('answer-feedback').innerText = '';
+                document.getElementById('answer').value = '';
+                document.getElementById('next-question-button').style.display = 'none';
+            } else {
+                endQuiz();
+            }
+        }
 
-    function loadQuestion() {
-      if (currentQuestionIndex < currentQuiz.length) {
-        document.getElementById('question-text').innerText = currentQuiz[currentQuestionIndex].question;
-        document.getElementById('answer-feedback').innerText = '';
-        document.getElementById('answer').value = '';
-      } else {
-        endQuiz();
-      }
-    }
+        function submitAnswer() {
+            const userAnswer = document.getElementById('answer').value.trim();
+            const correctAnswer = currentQuiz[currentQuestionIndex].answer;
 
-    function submitAnswer() {
-      const userAnswer = document.getElementById('answer').value.trim();
-      const correctAnswer = currentQuiz[currentQuestionIndex].answer;
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                document.getElementById('answer-feedback').innerText = 'Correct!';
+                document.getElementById('answer-feedback').style.color = 'green';
+                score++;
+            } else {
+                document.getElementById('answer-feedback').innerText = `Incorrect! The correct answer is: ${correctAnswer}`;
+                document.getElementById('answer-feedback').style.color = 'red';
+            }
+            document.getElementById('next-question-button').style.display = 'block';
+        }
 
-      if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-        document.getElementById('answer-feedback').innerText = 'Correct!';
-        score++;
-      } else {
-        document.getElementById('answer-feedback').innerText = `Incorrect! The correct answer is: ${correctAnswer}`;
-      }
+        function nextQuestion() {
+            document.getElementById('next-question-button').style.display = 'none';
+            document.getElementById('answer-feedback').innerText = '';
+            currentQuestionIndex++;
+            loadQuestion();
+        }
 
-      setTimeout(() => {
-        currentQuestionIndex++;
-        loadQuestion();
-      }, 2000);
-    }
+        function endQuiz() {
+            document.getElementById('quiz-area').style.display = 'none';
+            document.getElementById('quiz-summary').style.display = 'block';
+            document.getElementById('summary-text').innerText = `You scored ${score} out of ${currentQuiz.length}`;
+        }
 
-    function endQuiz() {
-      document.getElementById('quiz-area').style.display = 'none';
-      document.getElementById('quiz-summary').style.display = 'block';
-
-      document.getElementById('summary-text').innerText = `You scored ${score} out of ${currentQuiz.length}`;
-    }
-
-    function restartQuiz() {
-      document.getElementById('quiz-summary').style.display = 'none';
-      document.getElementById('topic-selection').style.display = 'block';
-    }
-  </script>
+        function restartQuiz() {
+            document.getElementById('quiz-summary').style.display = 'none';
+            document.getElementById('topic-selection').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
