@@ -1,280 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C-12 Quiz</title>
+    <title>C-12 Ops Limits Study Guide</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 2rem;
-            padding: 0;
-            text-align: center;
+            margin: 0;
+            padding: 20px;
         }
 
         table {
-            width: 90%;
-            margin: 2rem auto;
+            width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
 
-        th, td {
-            border: 1px solid #ccc;
+        th,
+        td {
+            border: 1px solid black;
             padding: 8px;
             text-align: center;
         }
 
         th {
-            background-color: #f4f4f4;
-            font-weight: bold;
+            background-color: #f0f0f0;
         }
 
-        input {
-            width: 100px;
+        .input-field {
+            width: 50px;
             text-align: center;
+            border: 1px solid orange;
+            padding: 2px;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            text-align: left;
-            color: #333;
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
         }
 
-        .feedback {
-            font-weight: bold;
-            margin-top: 1rem;
+        .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        #submit {
+            background-color: #008cba;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #submit:hover {
+            background-color: #005f73;
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>C-12 Quiz</h1>
-        <p>Fill in the blanks and press "Submit" to check your answers.</p>
-    </header>
 
-    <!-- Operating Conditions Table -->
-    <h2 class="section-title">Operating Conditions</h2>
+<body>
+    <h1>C-12 Ops Limits Study Guide</h1>
+
+    <!-- Table: Operating Condition Section -->
     <table>
         <thead>
             <tr>
                 <th>Operating Condition</th>
-                <th>Torque Percent<sup>1</sup></th>
-                <th>Maximum Observed TGT (°C)<sup>2</sup></th>
-                <th>Gas Generator RPM N1 (%)<sup>3</sup></th>
-                <th>Prop RPM N2<sup>4</sup></th>
-                <th>Oil Press PSI<sup>5</sup></th>
-                <th>Oil Temp (°C)<sup>6</sup></th>
+                <th>Torque Percent <sup>1</sup></th>
+                <th>Maximum Observed TGT °C <sup>11</sup></th>
+                <th>Gas Generator RPM N1% <sup>10</sup></th>
+                <th>Prop RPM N2</th>
+                <th>Oil Press PSI <sup>2</sup></th>
+                <th>Oil Temp °C</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Takeoff</td>
-                <td><input type="text" data-answer="100"></td>
-                <td><input type="text" data-answer="750"></td>
-                <td><input type="text" data-answer="101.5"></td>
-                <td><input type="text" data-answer="2000"></td>
-                <td><input type="text" data-answer="105 to 135"></td>
-                <td><input type="text" data-answer="10 to 99"></td>
+                <td>Takeoff <sup>3</sup></td>
+                <td><input class="input-field" data-answer="100"></td>
+                <td><input class="input-field" data-answer="750"></td>
+                <td><input class="input-field" data-answer="101.5"></td>
+                <td><input class="input-field" data-answer="2000"></td>
+                <td>
+                    <input class="input-field" data-answer="105"> to
+                    <input class="input-field" data-answer="135">
+                </td>
+                <td>
+                    <input class="input-field" data-answer="10"> to
+                    <input class="input-field" data-answer="99">
+                </td>
             </tr>
             <tr>
-                <td>Emergency Continuous</td>
-                <td><input type="text" data-answer="100"></td>
-                <td><input type="text" data-answer="750"></td>
-                <td><input type="text" data-answer="101.5"></td>
-                <td><input type="text" data-answer="2000"></td>
-                <td><input type="text" data-answer="105 to 135"></td>
-                <td><input type="text" data-answer="10 to 99"></td>
+                <td>Emer Cont <sup>4</sup></td>
+                <td><input class="input-field" data-answer="100"></td>
+                <td><input class="input-field" data-answer="750"></td>
+                <td><input class="input-field" data-answer="101.5"></td>
+                <td><input class="input-field" data-answer="2000"></td>
+                <td>
+                    <input class="input-field" data-answer="105"> to
+                    <input class="input-field" data-answer="135">
+                </td>
+                <td>
+                    <input class="input-field" data-answer="10"> to
+                    <input class="input-field" data-answer="99">
+                </td>
             </tr>
             <tr>
-                <td>Maximum Continuous</td>
-                <td><input type="text" data-answer="100"></td>
-                <td><input type="text" data-answer="725"></td>
-                <td><input type="text" data-answer="101.5"></td>
-                <td><input type="text" data-answer="2000"></td>
-                <td><input type="text" data-answer="105 to 135"></td>
-                <td><input type="text" data-answer="10 to 99"></td>
+                <td>Max Cont</td>
+                <td><input class="input-field" data-answer="100"></td>
+                <td><input class="input-field" data-answer="725"></td>
+                <td><input class="input-field" data-answer="101.5"></td>
+                <td><input class="input-field" data-answer="2000"></td>
+                <td>---</td>
+                <td>
+                    <input class="input-field" data-answer="-40"> to
+                    <input class="input-field" data-answer="99">
+                </td>
             </tr>
             <tr>
                 <td>High Idle</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td><input type="text" data-answer="70"></td>
-                <td>N/A</td>
-                <td><input type="text" data-answer="60"></td>
-                <td><input type="text" data-answer="-40 to 99"></td>
+                <td>---</td>
+                <td>---</td>
+                <td><input class="input-field" data-answer="5"></td>
+                <td>---</td>
+                <td>---</td>
+                <td>
+                    <input class="input-field" data-answer="-40"> to
+                    <input class="input-field" data-answer="99">
+                </td>
             </tr>
             <tr>
                 <td>Low Idle</td>
-                <td>N/A</td>
-                <td><input type="text" data-answer="660"></td>
-                <td><input type="text" data-answer="60"></td>
-                <td><input type="text" data-answer="1150"></td>
-                <td><input type="text" data-answer="60"></td>
-                <td><input type="text" data-answer="-40 to 99"></td>
+                <td>---</td>
+                <td><input class="input-field" data-answer="660"></td>
+                <td><input class="input-field" data-answer="60"></td>
+                <td><input class="input-field" data-answer="1150"></td>
+                <td>
+                    <input class="input-field" data-answer="60"> (min)
+                </td>
+                <td>
+                    <input class="input-field" data-answer="-40"> to
+                    <input class="input-field" data-answer="99">
+                </td>
             </tr>
             <tr>
                 <td>Starting</td>
-                <td>N/A</td>
-                <td><input type="text" data-answer="1000"></td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td><input type="text" data-answer="-40"></td>
+                <td>---</td>
+                <td><input class="input-field" data-answer="1000"></td>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+                <td><input class="input-field" data-answer="-40"> (min)</td>
             </tr>
             <tr>
-                <td>Transient</td>
-                <td><input type="text" data-answer="123"></td>
-                <td><input type="text" data-answer="850"></td>
-                <td><input type="text" data-answer="102.6"></td>
-                <td><input type="text" data-answer="2200"></td>
-                <td>N/A</td>
-                <td><input type="text" data-answer="100 to 104"></td>
+                <td>Transient <sup>7</sup></td>
+                <td><input class="input-field" data-answer="123"></td>
+                <td><input class="input-field" data-answer="850"></td>
+                <td><input class="input-field" data-answer="102.6"></td>
+                <td><input class="input-field" data-answer="2200"></td>
+                <td>---</td>
+                <td>
+                    <input class="input-field" data-answer="100"> to
+                    <input class="input-field" data-answer="104">
+                </td>
             </tr>
             <tr>
-                <td>Max Reverse</td>
-                <td>N/A</td>
-                <td><input type="text" data-answer="750"></td>
-                <td><input type="text" data-answer="88"></td>
-                <td><input type="text" data-answer="1900"></td>
-                <td><input type="text" data-answer="105 to 135"></td>
-                <td><input type="text" data-answer="0 to 99"></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- Footnotes Section with Numbers -->
-    <h2 class="section-title">Footnotes</h2>
-    <table>
-        <tbody>
-            <tr><td>1. Torque limit applies within range of 1600-2000 prop RPM (N2). Below 1600 RPM, torque is limited to __%</td><td><input type="text" data-answer="49"></td></tr>
-            <tr><td>2. The minimum oil pressure above 21,000 feet is __ PSIG.</td><td><input type="text" data-answer="85"></td></tr>
-            <tr><td>3. Oil pressure values are acceptable between __ and __ PSIG.</td><td><input type="text" data-answer="60 to 85"></td></tr>
-            <tr><td>4. Operation maximum torque limit is time-restricted to __ minutes.</td><td><input type="text" data-answer="5"></td></tr>
-            <tr><td>5. Refers to High Idle RPM __%</td><td><input type="text" data-answer="70"></td></tr>
-            <tr><td>6. Values temperature-specific for gas-generator observed __%</td><td><input (**Extra validate-connective description specs(aux)).
-Apologies for the abrupt truncation earlier! Let me clean this up and finish integrating all **footnotes**, ensuring that:
-1. **Footnote numbers** appear within both the **Operating Conditions table** and the related questions in the **Footnotes Section**.
-2. Each footnote question properly references its context, especially for items like **Footnote 5** (High Idle RPM).
-3. All formatting issues are corrected for full functionality.
-
-Here’s the finalized structure:
-
----
-
-### Final HTML Implementation (Operating Conditions Table + Fully Integrated Footnotes)
-````html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C-12 Quiz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 2rem;
-            padding: 0;
-            text-align: left;
-        }
-
-        table {
-            width: 90%;
-            margin: 2rem auto;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f4f4f4;
-            font-weight: bold;
-        }
-
-        input {
-            width: 100px;
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            color: #333;
-        }
-
-        .feedback {
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>C-12 Quiz</h1>
-        <p>Fill in the blanks and press "Submit" to check your answers.</p>
-    </header>
-
-    <!-- Operating Conditions Table -->
-    <h2 class="section-title">Operating Conditions</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Operating Condition</th>
-                <th>Torque Percent<sup>1</sup></th>
-                <th>Maximum Observed TGT (°C)<sup>2</sup></th>
-                <th>Gas Generator RPM N1 (%)<sup>5</sup></th>
-                <th>Prop RPM N2<sup>7</sup></th>
-                <th>Oil Press PSI<sup>3</sup></th>
-                <th>Oil Temp (°C)<sup>6</sup></th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Existing rows: unchanged -->
-            <tr>
-                <td>Takeoff</td>
-                <td><input type="text" data-answer="100"></td>
-                <td><input type="text" data-answer="750"></td>
-                <td><input type="text" data-answer="101.5"></td>
-                <td><input type="text" data-answer="2000"></td>
-                <td><input type="text" data-answer="105 to 135"></td>
-                <td><input type="text" data-answer="10 to 99"></td>
-            </tr>
-            <tr>
-                <td>High Idle (N1 Gas Generator RPM)</td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td><input type="text" data-answer="70"></td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td><input type="text" data-answer="-40 to 99"></td>
+                <td>Max Reverse <sup>9</sup></td>
+                <td>---</td>
+                <td><input class="input-field" data-answer="750"></td>
+                <td><input class="input-field" data-answer="88"></td>
+                <td><input class="input-field" data-answer="1900"></td>
+                <td>
+                    <input class="input-field" data-answer="105"> to
+                    <input class="input-field" data-answer="135">
+                </td>
+                <td>
+                    <input class="input-field" data-answer="0"> to
+                    <input class="input-field" data-answer="99">
+                </td>
             </tr>
         </tbody>
     </table>
 
     <!-- Footnotes Section -->
-    <h2 class="section-title">Footnotes</h2>
     <table>
         <tbody>
             <tr>
-                <td>1. Torque limit applies within range of 1600-2000 prop RPM (N2). Below 1600 RPM, torque is limited to __%</td>
-                <td><input type="text" data-answer="49"></td>
+                <td>1. Torque limit applies within range of 1600-2000 prop RPM (N2).</td>
             </tr>
             <tr>
-                <td>2. The minimum oil pressure above 21,000 feet is __ PSIG.</td>
-                <td><input type="text" data-answer="85"></td>
+                <td>2. Oil pressure above 21,000 feet is <input class="input-field" data-answer="85"> PSIG +/- <input class="input-field"
+                        data-answer="10"> PSIG fluctuations are acceptable.</td>
             </tr>
             <tr>
-                <td>3. Oil pressure should not exceed values between __ and __ PSIG.</td>
-                <td><input type="text" data-answer="60 to 85"></td>
+                <td>3. These values are limited to <input class="input-field" data-answer="5"> minutes.</td>
             </tr>
             <tr>
-                <td>5. High Idle Gas Generator RPM: approximately __%</td>
-                <td><input type="text" data-answer="70"></td>
+                <td>4. Cruise torque values vary with altitude and temperature.</td>
             </tr>
             <tr>
-                <td>6. Oil Temperature time-limited operational maximum </td>
-                <td>(40-`FAR)` Footnotes-correct alignment
+                <td>5. At approximately <input class="input-field" data-answer="70"> % N1.</td>
+            </tr>
+            <tr>
+                <td>6. High TGT at ground idle may be corrected by reducing <input class="input-field" data-answer="load"> and/or increasing <input
+                        class="input-field" data-answer="N1">.</td>
+            </tr>
+            <tr>
+                <td>7. These values are time limited to <input class="input-field" data-answer="5"> seconds.</td>
+            </tr>
+            <tr>
+                <td>8. These values are time limited to <input class="input-field" data-answer="10"> seconds.</td>
+            </tr>
+            <tr>
+                <td>9. This operation is time limited to <input class="input-field" data-answer="1"> minute.</td>
+            </tr>
+            <tr>
+                <td>10. For every 5.6°C below -48°C ambient temperature, reduce maximum allowable N1 by 1.6%.</td>
+            </tr>
+            <tr>
+                <td>11. For TGT in excess of 750°C, refer to Engine Overtemperature Limits chart.</td>
+            </tr>
+            <tr>
+                <td>12. On the ground, increases in oil temp can be countered by placing the CONDITION lever in <input class="input-field"
+                        data-answer="LOW IDLE"> and/or by turning the nose into the wind.</td>
+            </tr>
+            <tr>
+                <td>13. Operation between <input class="input-field" data-answer="0"> and <input class="input-field" data-answer="450"> propeller RPM is
+                    permissible only with prop feathered.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="submit">Submit All Answers</button>
+
+    <script>
+        document.getElementById('submit').addEventListener('click', () => {
+            const fields = document.querySelectorAll('.input-field');
+            fields.forEach(field => {
+                const correctValue = field.getAttribute('data-answer');
+                if (field.value.trim() === correctValue) {
+                    field.classList.remove('error');
+                    field.classList.add('success');
+                } else {
+                    field.classList.remove('success');
+                    field.classList.add('error');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
